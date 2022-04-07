@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Simple Booking Markers</title>
+	<style>
+
+		#map {
+			height: 100%;
+		}
+
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="map"></div>
+	<div id="j"></div>
+
+	<script>
+		if (typeof (EventSource) !== "undefined") {
+
+			var source = new EventSource("/bookings",
+				{headers: "Content-Type: text/event-stream"});
+			source.onmessage = function (event) {
+				var data = JSON.parse(event.data);
+				addMarker(data.plat, data.plon);
+			};
+		} else {
+			document.getElementById("result").innerHTML =
+				"Sorry, your browser does not support server-sent events...";
+		}
+
+		function addMarker(latv, lngv, cname) {
+			var myLatLng = {lat: latv, lng: lngv};
+
+			new google.maps.Marker({
+				position: myLatLng,
+				map: map,
+				title: cname
+			});
+		}
+
+		function initMap() {
+			var myLatLng = {lat: 1.3649, lng: 103.8228};
+
+			map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 13,
+				center: myLatLng
+			});
+		}
+
+	</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=XXXX&callback=initMap">
+		</script>
+</body>
+
+</html>
