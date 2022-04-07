@@ -24,9 +24,9 @@ public class TweetStreamFilterDemo {
 	  // export 'BEARER_TOKEN'='<your_bearer_token>'
 
 	  public static void main(String args[]) throws IOException, URISyntaxException {
-	    //String bearerToken = System.getenv("env:BEARER_TOKEN");
-	   // System.out.println(bearerToken);
-	    String bearerToken= "AAAAAAAAAAAAAAAAAAAAAAgODQEAAAAAdWBcB74w1axVDW0HPtyEskgQwbA%3DJoyZePczTclp6X15t99O3azdEuhi9r7BRlQ3QmuT5EeX0KnuYG";
+	    String bearerToken = System.getenv("env:BEARER_TOKEN");
+	    System.out.println(bearerToken);
+	   
 	    if (null != bearerToken) {
 	      Map<String, String> rules = new HashMap<String, String>();
 	      rules.put("cats has:images", "cat images");
